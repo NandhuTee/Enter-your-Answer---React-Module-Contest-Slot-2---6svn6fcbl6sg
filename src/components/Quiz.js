@@ -43,12 +43,21 @@ function Quiz() {
       setAnswer("");
       if (questionIndex < questions.length - 1) {
         setQuestionIndex(questionIndex + 1);
+        setAttempts(0); // Reset attempts when moving to the next question
       } else {
         setGameOver(true);
       }
     } else {
       setAttempts(attempts + 1);
       setAnswer("");
+      if (attempts >= 2) {
+        if (questionIndex < questions.length - 1) {
+          setQuestionIndex(questionIndex + 1);
+          setAttempts(0); // Reset attempts when moving to the next question
+        } else {
+          setGameOver(true);
+        }
+      }
     }
   };
 
@@ -87,7 +96,7 @@ function Quiz() {
             ? "Incorrect. Two attempts remaining."
             : attempts === 2
             ? "Incorrect. One attempt remaining."
-            : "Incorrect. Moving to the next question."}
+            : ""}
         </p>
       )}
     </div>
